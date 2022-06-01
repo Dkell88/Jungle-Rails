@@ -4,8 +4,6 @@ class ApplicationController < ActionController::Base
   
   protect_from_forgery with: :exception
 
-  puts "This is the password!! #{ENV["password"].class}"
-  puts "This is the user!! #{ENV["username"].class}"
 
   private
 
