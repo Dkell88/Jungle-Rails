@@ -4,7 +4,7 @@
     <h1>My Cart</h1>
   </header>
 
-  <% if !enhanced_cart -%>
+  <% if !(enhanced_cart.length == 0) -%>
     <div class="panel panel-default items">
       <table class="table table-bordered">
         <thead>
@@ -51,7 +51,7 @@
     </div>
   <% else %> 
 
-    <h1 class="alert alert-primary .mx-auto" role="alert">Your carts empty yo! </h1>
+    <h1 class="alert alert-primary" role="alert">Your carts empty yo! </h1>
 
   <% end -%>
 
