@@ -4,7 +4,7 @@ describe('Testing Cart page', () => {
     cy.visit('/')   
   }) 
 
-  it("Should navigate to product page", () => {
+  it("Should navigate to product page click on add and ensure cart updates", () => {
     
     cy.get('.products article').first().click()
     cy.get('.btn').click()
