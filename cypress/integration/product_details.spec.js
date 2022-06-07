@@ -2,13 +2,13 @@
 describe('Testing Product page', () => {  
   
   beforeEach(() => {  
-    cy.visit('/products/2')   
+    cy.visit('/')   
   }) 
-  it("Visit product page 1", () => {
-    cy.visit('/products/1') 
-  });
-  it("There should be price", () => {
-    cy.get(".quantity > :nth-child(2)").should('be.visible');
+
+  it("Should navigate to product page", () => {
+    
+    cy.get('.products article').first().click()
+  
   });
   
 })  
