@@ -102,19 +102,28 @@ RSpec.describe User, type: :model do
   describe '.authenticate_with_credentials' do
 
     @user = User.new(
-      :first_name => 'Darren', 
-      :last_name => 'Kelly', 
-      :email => 'Test@G.com', 
+      :first_name => 'test', 
+      :last_name => 'tester', 
+      :email => 'testemail@g.com'.strip.downcase, 
       :password => 'password', 
       :password_confirmation => 'password')
     @user.save
 
     it 'Should just work' do
-      expect(User.authenticate_with_credentials('DK@G.com', 'password')).to be_truthy
+      expect(User.authenticate_with_credentials('testemail@g.com', 'password')).to be_truthy
     end
 
-    it 'Should erturn nil' do
-      expect(User.authenticate_with_credentials(nil, 'password')).to be_nil
+    it 'Should return nil for no password' do
+      expect(User.authenticate_with_credentials('testemail@g.com', nil)).to be_nil
+    end
+    it 'Should return nil for no user email' do
+      expect(User.authenticate_with_credentials('testemail@g.com', nil)).to be_nil
+    end
+    it 'Should return true even with white space' do
+      expect(User.authenticate_with_credentials('  testemail@g.com   ', 'password')).to be_truthy
+    end
+    it 'Should return true even with Upper case' do
+      expect(User.authenticate_with_credentials('TestEmail@G.com', 'password')).to be_truthy
     end
 
   end

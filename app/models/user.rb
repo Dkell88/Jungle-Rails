@@ -15,7 +15,12 @@ class User < ApplicationRecord
     if (email.nil?|| password.nil?) 
       return nil
     end
-    User.find_by(email: email)
+    user = User.find_by(email: email.strip.downcase)
+    if user && user.authenticate(password)
+      user
+    else
+      nil
+    end
   end 
   
 
