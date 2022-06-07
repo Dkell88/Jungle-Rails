@@ -12,11 +12,10 @@ class User < ApplicationRecord
 
   def self.authenticate_with_credentials(email, password)
 
-    if (email.nil? || password.nil?) 
+    if (email.nil?|| password.nil?) 
       return nil
     end
-    
-    User.find_by(email: email.strip.downcase)&.authenticate(password)
+    User.find_by(email: email)
   end 
   
 

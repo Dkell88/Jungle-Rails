@@ -9,7 +9,8 @@ RSpec.describe User, type: :model do
 
 
     it 'Should be valid' do
-      user = User.new(:first_name => 'Darren', :last_name => 'Kelly', :email => 'DK@G.com', :password => 'sdgdfh43ujh573', :password_confirmation => 'sdgdfh43ujh573')
+      user = User.new(:first_name => 'Darren', :last_name => 'Kelly', :email => 'DPK@G.com', :password => 'sdgdfh43ujh573',
+        :password_confirmation => 'sdgdfh43ujh573')
       expect(user).to be_valid
     end
 
@@ -17,9 +18,9 @@ RSpec.describe User, type: :model do
       user = User.new(
         :first_name => nil, 
         :last_name => 'Kelly', 
-        :email => 'DK@G.com', 
+        :email => 'DPK@G.com', 
         :password => 'sdgdfh43ujh573',
-         :password_confirmation => 'sdgdfh43ujh573')
+        :password_confirmation => 'sdgdfh43ujh573')
       expect(user).to_not be_valid
       expect(user.errors.full_messages).to include "First name can't be blank"
     end
@@ -50,7 +51,7 @@ RSpec.describe User, type: :model do
       user = User.new(
         :first_name => 'Darren', 
         :last_name => 'Kelly', 
-        :email => 'DK@G.com', 
+        :email => 'DPK@G.com', 
         :password => nil, 
         :password_confirmation => 'sdgdfh43ujh573')
       expect(user).to_not be_valid
@@ -61,7 +62,7 @@ RSpec.describe User, type: :model do
       user = User.new(
         :first_name => 'Darren', 
         :last_name => 'Kelly', 
-        :email => 'DK@G.com', 
+        :email => 'DPK@G.com', 
         :password => 'sd', 
         :password_confirmation => 'sd')
       expect(user).to_not be_valid
@@ -72,7 +73,7 @@ RSpec.describe User, type: :model do
       user = User.new(
         :first_name => 'Darren', 
         :last_name => 'Kelly', 
-        :email => 'DK@G.com', 
+        :email => 'DPK@G.com', 
         :password => 'sdgdfh43ujh573', 
         :password_confirmation => 'sdgdfh43ujh')
       expect(user).to_not be_valid
@@ -83,20 +84,38 @@ RSpec.describe User, type: :model do
       user = User.new(
         :first_name => 'Darren', 
         :last_name => 'Kelly', 
-        :email => 'DK@G.com', 
+        :email => 'DPK@G.com', 
         :password => 'sdgdfh43ujh573', 
         :password_confirmation => 'sdgdfh43ujh573')
         user.save
       user2 = User.new(
         :first_name => 'Tatiana', 
         :last_name => 'Aniks', 
-        :email => 'DK@G.com', 
+        :email => 'DPK@G.com', 
         :password => 'sdgdfh43ujh573', 
         :password_confirmation => 'sdgdfh43ujh573')
       expect(user2).to_not be_valid
       expect(user2.errors.full_messages).to include "Email has already been taken"
     end
-
   end
 
+  describe '.authenticate_with_credentials' do
+
+    @user = User.new(
+      :first_name => 'Darren', 
+      :last_name => 'Kelly', 
+      :email => 'Test@G.com', 
+      :password => 'password', 
+      :password_confirmation => 'password')
+    @user.save
+
+    it 'Should just work' do
+      expect(User.authenticate_with_credentials('DK@G.com', 'password')).to be_truthy
+    end
+
+    it 'Should erturn nil' do
+      expect(User.authenticate_with_credentials(nil, 'password')).to be_nil
+    end
+
+  end
 end
