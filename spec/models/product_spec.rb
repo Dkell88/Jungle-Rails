@@ -7,7 +7,7 @@ RSpec.describe Product, type: :model do
       @catagory = Category.new(:name => "Category_test")
     end
 
-    it 'Should have a name' do
+    it 'Should have be a' do
       expect(Product.new).to be_a Product
     end
 
